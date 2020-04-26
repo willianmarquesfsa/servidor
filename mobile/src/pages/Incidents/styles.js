@@ -1,21 +1,26 @@
 import {StyleSheet} from 'react-native';
 import Constants from 'expo-constants';
 
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize"; 
+
 export default StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 24,
-        paddingTop: Constants.statusBarHeight + 20,
+        paddingHorizontal: 20,
+        paddingTop: Constants.statusBarHeight,
     },
 
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        
+        
+
     },
 
     headerText: {
-        fontSize: 15,
+        fontSize: RFValue(15, 580),
         color: '#737380'
     },
 
@@ -24,8 +29,9 @@ export default StyleSheet.create({
     },
 
     title:{
-         fontSize: 28,
-         marginTop: 25,
+        fontSize: RFValue(22, 580),
+         marginTop: 16,
+         marginRight: 100,
          marginBottom: 16,
          color: '#13131a',
          fontWeight: 'bold'
@@ -40,28 +46,49 @@ export default StyleSheet.create({
     },
 
     incidentsList: {
+        marginTop: 20,
+        
+    },
+
+    incidentsList2: {
         marginTop: 18,
+        borderRadius: 14,
+        backgroundColor: '#FFF',
+        paddingVertical: 15,
+        padding: 10
+        
+        
     },
 
     incidents: {
-        padding: 24,
-        borderRadius: 8,
-        backgroundColor: '#FFF',
-        marginBottom: 16, 
+        //padding: 24,
+        
+        //marginBottom: 16,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row',
+        
+        
     },
     
     incidentsProperty:{
-        fontSize: 14,
+        fontSize: RFValue(14),
         color: '#41414d',
-        fontWeight: 'bold'
+        //fontWeight: 'bold',
+        padding: 24,
+        marginTop: -35
     },
 
     incidentsValue: {
-        fontSize: 15,
-        marginTop: 8,
-        marginBottom: 24,
-        color: '#737380'
+        flex: 1,
+        //justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 20,
+        marginTop: -20,
+        fontSize: RFValue(18),
+        fontWeight: 'bold',
 
+               
     },
 
     detailButton: {
@@ -78,7 +105,86 @@ export default StyleSheet.create({
 
     headerTextBold : {
         fontWeight: 'bold'
-    }
+    },
+
+    actions: {
+        //marginTop: 16,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        
+ },
+
+ action1: {
+    //paddingLeft: 30,
+    
+    //height: 50,
+    //width: '28%',
+    
+},
+action2: {
+    //paddingHorizontal: 30
+    
+    //height: 50,
+    width: '50%',
+    alignItems: 'center',
+    
+},
+action3: {
+    //paddingRight:30
+   // width: '28%',
+    //height: 50,
+    
+    
+},
+
+
+
+
+
+   /* instagram: {
+        overflow: 'hidden',
+    },
+    
+    instagram: { wrap: {
+        bordertop: '1px solid #eee',
+        marginleft: 'auto',
+        marginright: 'auto',
+        maxwidth: 1280,
+        paddingbottom: 30,
+        paddingtop: 40,
+        textalign: 'center',
+    },},
+    
+    instagram: {widgettitle: {
+        fontfamily: 'Playfair Display serif',
+        fontsize: 24,
+        fontsize: 2.4,
+        fontstyle: 'italic',
+        marginbottom: 20
+    },},
+    
+    instagram: {ul: {
+        display: inline-block,
+        marginleft: 'auto',
+        marginright: 'auto',
+    },},
+    
+    instagram: {ul: {li: {
+        float: left,
+        marginleft: 15,
+        marginright: 15,
+    },},},
+    
+    instagram: {img: {
+        height: 160,
+        verticalalign: top,
+        width: 160,
+    },}
+
+
+*/
+
+
 
 
 })
