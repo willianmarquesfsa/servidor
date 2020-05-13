@@ -58,7 +58,23 @@ module.exports = {
             //.where('ongs.grupo', '=', grupo, )
             .where('ongs.centrolojistico', '=', centrolojistico );    
 
-
+            const incidents3 = await connection('incidents')
+            .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
+            .limit(5)
+            .offset((page - 1) * 5)
+            .select([
+                'incidents.*',
+                'ongs.name',
+                'ongs.email',
+                'ongs.destaque',
+                'ongs.grupo',
+                'ongs.whatsapp',
+                'ongs.city',
+                'ongs.centrolojistico',
+                'ongs.uf'
+            ])
+            .where('ongs.destaque', '=', 1, )
+            //.where('ongs.centrolojistico', '=', centrolojistico );
 
 
 
@@ -68,6 +84,9 @@ module.exports = {
 
         if(grupo == 'Todos'){
             return response.json(incidents2)
+    };
+        if(grupo == 'Todoss'){
+        return response.json(incidents3)
     };
 
         if(grupo != 'Todos'){
