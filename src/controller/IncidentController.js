@@ -73,7 +73,7 @@ module.exports = {
                 'ongs.centrolojistico',
                 'ongs.uf'
             ])
-            .where('ongs.destaque', '=', 1, )
+            .where('incidents.destaque', '=', 2, )
             //.where('ongs.centrolojistico', '=', centrolojistico );
 
 
@@ -98,7 +98,7 @@ module.exports = {
 
 
     async create(request, response) {
-        const { title, description, value, instagram } = request.body
+        const { title, description, value, instagram, destaque } = request.body
 
         const ong_id = request.headers.authorization;
 
@@ -107,7 +107,8 @@ module.exports = {
             description,
             value,
             ong_id,
-            instagram
+            instagram,
+            destaque
 
         })
         return response.json({ id })
