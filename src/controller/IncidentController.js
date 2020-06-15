@@ -98,17 +98,19 @@ module.exports = {
 
 
     async create(request, response) {
-        const { title, description, value, instagram, destaque } = request.body
+        const { title, description, value, instagram, destaque, google } = request.body
 
         const ong_id = request.headers.authorization;
 
+        
         const [id] = await connection('incidents').insert({
             title,
             description,
             value,
             ong_id,
             instagram,
-            destaque
+            destaque,
+            google
 
         })
         return response.json({ id })
