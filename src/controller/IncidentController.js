@@ -1,5 +1,24 @@
 const connection = require('../database/connection');
 
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+let space = 'og:image" content="';
+let space2 = 'og:title" content="';
+let space3 = 'biography":"';
+
+let valim = '" />';
+let vatit = '(@';
+let vades = '","bloc';
+
+var splitString = function(stringToSplit, separator, vain) {
+    var arrayOfStrings = stringToSplit.split(separator);
+    var test = arrayOfStrings[1].split(vain)
+    if(test[0].length>500) { console.log('Muito Grande')}
+        else  
+        console.log(test[0])
+        return test[0]
+              
+     }
+
 module.exports = {
     async index(request, response) {
 
@@ -98,11 +117,36 @@ module.exports = {
 
 
     async create(request, response) {
-        const { title, description, value, instagram, destaque, google } = request.body
 
+        const { value, destaque, google } = request.body
         const ong_id = request.headers.authorization;
 
+        /*const instagram = '';
+        const description = '';
+        const title = '';
+        */
+        console.log(value)
         
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('GET', value, false);   
+        try {
+            xhr.send();
+            if (xhr.status != 200) {
+              console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+            } else {
+                    
+                    instagram =  splitString(xhr.responseText, space, valim);
+                    title =  splitString(xhr.responseText, space2, vatit);
+                    description = splitString(xhr.responseText,space3, vades); 
+                    
+               }
+           }
+           catch(err) { // instead of onerror
+            console.log('erro')
+          }
+
+               
         const [id] = await connection('incidents').insert({
             title,
             description,

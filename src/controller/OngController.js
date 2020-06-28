@@ -4,7 +4,8 @@ const crypto = require('crypto');
 module.exports = {
 
     async index(request, response) {
-        const ongs = await connection('ongs').select('*');
+        const { page = 1 } = request.query;
+        const ongs = await connection('ongs').select('*').limit(5).offset((page - 1) * 5)
         return response.json(ongs);
     },
 
