@@ -3,7 +3,7 @@ const crypto = require('crypto');
 
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;	
 let space = 'og:image" content="';
-let space2 = 'og:title" content="';
+let space2 = '<title>';
 let space3 = 'biography":"';
 
 let valim = '" />';
@@ -15,7 +15,7 @@ let vades = '","bloc';
 var splitString = function(stringToSplit, separator, vain) {
     var arrayOfStrings = stringToSplit.split(separator);
     var test = arrayOfStrings[1].split(vain)
-    if(test[0].length>500) { console.log('Muito Grande')}
+    if(test[0].length>300) { console.log('Muito Grande')}
         else  
         console.log(test[0])
         return test[0]
@@ -76,9 +76,16 @@ module.exports = {
             catch(err){}
         }
         
-        var i = 0;
+        var i = 47;
         function test() {
          console.log(i)
+
+         if (i==arr.length) {
+            
+  
+            return console.log('Filé') 
+         }
+         else
 
         xhr.open('GET', arr[i].value, false);   
         try {
@@ -96,13 +103,19 @@ module.exports = {
            catch(err) { // instead of onerror
             console.log('erro')
           }
+                 
           
-        
+          
           i++;
-          if (i===arr.length) {return response.send('Pronto')}
-          setTimeout(test, 100 );
+          setTimeout(test, 100 )
+          
+          ;
+          
+           
         }
         test()
+        
+        
     },
 
 

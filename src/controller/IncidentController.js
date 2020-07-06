@@ -129,7 +129,7 @@ module.exports = {
         
         let xhr = new XMLHttpRequest();
 
-        xhr.open('GET', value, false);   
+        xhr.open('GET', String(value), false);   
         try {
             xhr.send();
             if (xhr.status != 200) {
