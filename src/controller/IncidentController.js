@@ -1,6 +1,6 @@
 const connection = require('../database/connection');
 
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+/*const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 let space = 'og:image" content="';
 let space2 = 'og:title" content="';
 let space3 = 'biography":"';
@@ -18,7 +18,7 @@ var splitString = function(stringToSplit, separator, vain) {
         return test[0]
               
      }
-
+*/
 module.exports = {
     async index(request, response) {
 
@@ -118,7 +118,7 @@ module.exports = {
 
     async create(request, response) {
 
-        const { value, destaque, google } = request.body
+        const { title, description, value, instagram, destaque, google } = request.body
         const ong_id = request.headers.authorization;
 
         /*const instagram = '';
@@ -127,36 +127,17 @@ module.exports = {
         */
         console.log(value)
         
-        let xhr = new XMLHttpRequest();
+        const [id] = await connection('incidents').insert({
+            title,
+            description,
+            value,
+            ong_id,
+            instagram,
+            destaque,
+            google
 
-        xhr.open('GET', String(value), false);   
-        try {
-            xhr.send();
-            if (xhr.status != 200) {
-              console.log(`Error ${xhr.status}: ${xhr.statusText}`);
-            } else {
-                    
-                    instagram =  splitString(xhr.responseText, space, valim);
-                    title =  splitString(xhr.responseText, space2, vatit);
-                    description = splitString(xhr.responseText,space3, vades); 
-
-                    const [id] = await connection('incidents').insert({
-                        title,
-                        description,
-                        value,
-                        ong_id,
-                        instagram,
-                        destaque,
-                        google
-            
-                    })
-                    return response.json({ id })
-               }
-           }
-           catch(err) { // instead of onerror
-            console.log('erro')
-          }
-
+        })
+        return response.json({ id })
                
         
         
