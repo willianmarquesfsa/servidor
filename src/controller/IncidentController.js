@@ -139,7 +139,18 @@ module.exports = {
                     instagram =  splitString(xhr.responseText, space, valim);
                     title =  splitString(xhr.responseText, space2, vatit);
                     description = splitString(xhr.responseText,space3, vades); 
-                    
+
+                    const [id] = await connection('incidents').insert({
+                        title,
+                        description,
+                        value,
+                        ong_id,
+                        instagram,
+                        destaque,
+                        google
+            
+                    })
+                    return response.json({ id })
                }
            }
            catch(err) { // instead of onerror
@@ -147,17 +158,8 @@ module.exports = {
           }
 
                
-        const [id] = await connection('incidents').insert({
-            title,
-            description,
-            value,
-            ong_id,
-            instagram,
-            destaque,
-            google
-
-        })
-        return response.json({ id })
+        
+        
     },
 
     async delete(request, response) {
