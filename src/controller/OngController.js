@@ -74,7 +74,7 @@ module.exports = {
 
 
             
-            
+              resposta = String(`Senha já enviada para o e-mail ${ongs2[0].email}` )  
 
        
 
@@ -84,7 +84,7 @@ module.exports = {
     }
     if (ongs2.length!=0){
         
-        resposta = String(`${ongs2[0].email} ja anteriormanete cadastrado` )
+        resposta = String(`Senha já enviada para o e-mail ${ongs2[0].email} anteriormanete cadastrado` )
         
         return response.json({resposta}
             
