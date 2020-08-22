@@ -102,6 +102,7 @@ module.exports = {
         
 
         if(grupo == 'Todos'){
+            console.log(grupo)
             return response.json(incidents2)
     };
         if(grupo == 'Todoss'){

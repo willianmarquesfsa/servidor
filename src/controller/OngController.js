@@ -65,7 +65,7 @@ module.exports = {
                 //console.log('teste')
                 
                 if (error) {
-                  console.log(error);
+                  console.log("1307"+error);
                 } else {
                   console.log('Email enviado: ' + info.response);
                 }
@@ -74,7 +74,7 @@ module.exports = {
 
 
             
-              resposta = String(`Senha já enviada para o e-mail ${ongs2[0].email}` )  
+              resposta = String(`Senha enviada para o e-mail ${email}` )  
 
        
 

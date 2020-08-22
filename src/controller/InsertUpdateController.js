@@ -76,7 +76,7 @@ module.exports = {
             catch(err){}
         }
         
-        var i = 47;
+        var i = 1;
         function test() {
          console.log(i)
 
