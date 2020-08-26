@@ -56,7 +56,9 @@ module.exports = {
                 'ongs.uf'
             ])
             .where('ongs.grupo', '=', grupo, )
-            .where('ongs.centrolojistico', '=', centrolojistico );
+            .where('ongs.centrolojistico', '=', centrolojistico )
+            .orderBy('incidents.id',"desc")
+            ;
 
 
             const incidents2 = await connection('incidents')
@@ -75,7 +77,8 @@ module.exports = {
                 'ongs.uf'
             ])
             //.where('ongs.grupo', '=', grupo, )
-            .where('ongs.centrolojistico', '=', centrolojistico );    
+            .where('ongs.centrolojistico', '=', centrolojistico )
+            .orderBy('incidents.id',"desc");    
 
             const incidents3 = await connection('incidents')
             .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
@@ -93,6 +96,7 @@ module.exports = {
                 'ongs.uf'
             ])
             .where('incidents.destaque', '=', 2, )
+            .orderBy('incidents.id',"desc")
             //.where('ongs.centrolojistico', '=', centrolojistico );
 
 
