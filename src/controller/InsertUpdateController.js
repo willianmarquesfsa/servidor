@@ -1,16 +1,12 @@
 const connection = require('../database/connection')
-const crypto = require('crypto');
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;	
 let space = 'og:image" content="';
 let space2 = '<title>';
 let space3 = 'biography":"';
-
 let valim = '" />';
 let vatit = '(@';
 let vades = '","bloc';
-
-
 
 var splitString = function(stringToSplit, separator, vain) {
     var arrayOfStrings = stringToSplit.split(separator);
@@ -22,27 +18,20 @@ var splitString = function(stringToSplit, separator, vain) {
               
      } 
 
-
 module.exports = {
 
-    async index(request, response) {
-
-        
+    async index(request, response) {        
         const incidents = await connection('incidents')
             .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
             .select([
                 'incidents.value',
                 'ongs.id'                
-            ])
-            //console.log(incidents)
-        
+            ])         
      
         let xhr = new XMLHttpRequest();
         let arr = incidents
-        console.log(arr.length)
-        console.log(incidents)
         
-        //for (var i = 30; i < 39; i++)
+       
         async function atualiin(mmm, inst) { 
             await connection('incidents').where('ong_id', mmm ).update({
                 instagram: inst
@@ -53,9 +42,7 @@ module.exports = {
             catch(err){}
         }
 
-        async function atualitit(mmm, inst) {
-            
-            
+        async function atualitit(mmm, inst) {           
             
             await connection('incidents').where('ong_id', mmm ).update({
                 title: inst
@@ -69,8 +56,7 @@ module.exports = {
         async function atualides(mmm, inst) { 
             await connection('incidents').where('ong_id', mmm ).update({
                 description: inst
-            });
-            
+            });            
             console.log(arr.id)
             try{ return response.status(204).send()}
             catch(err){}
@@ -80,8 +66,7 @@ module.exports = {
         function test() {
          console.log(i)
 
-         if (i==arr.length) {
-            
+         if (i==arr.length) {     
   
             return console.log('Filé') 
          }
@@ -92,34 +77,21 @@ module.exports = {
             xhr.send();
             if (xhr.status != 200) {
               console.log(`Error ${xhr.status}: ${xhr.statusText}`);
-            } else {
-                    
+            } else {                    
                     atualiin(arr[i].id, splitString(xhr.responseText, space, valim) )
                     atualitit(arr[i].id, splitString(xhr.responseText, space2, vatit) )
                     atualides(arr[i].id, splitString(xhr.responseText,space3, vades) )
                     
                }
            }
-           catch(err) { // instead of onerror
-            console.log('erro')
-          }
-                 
-          
+           catch(err) { 
+            console.log(err)
+          }     
           
           i++;
-          setTimeout(test, 100 )
-          
-          ;
-          
-           
+          setTimeout(test, 100 );           
         }
-        test()
-        
-        
+        test()        
     },
-
-
-
-
     
 }

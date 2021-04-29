@@ -1,46 +1,13 @@
 const connection = require('../database/connection');
 
-/*const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-let space = 'og:image" content="';
-let space2 = 'og:title" content="';
-let space3 = 'biography":"';
 
-let valim = '" />';
-let vatit = '(@';
-let vades = '","bloc';
-
-var splitString = function(stringToSplit, separator, vain) {
-    var arrayOfStrings = stringToSplit.split(separator);
-    var test = arrayOfStrings[1].split(vain)
-    if(test[0].length>500) { console.log('Muito Grande')}
-        else  
-        console.log(test[0])
-        return test[0]
-              
-     }
-*/
 module.exports = {
-    async index(request, response) {
-
-        
+    async index(request, response) {        
 
         const { page = 1 } = request.query;
         const {grupo = 1} = request.query;
-
-
- 
-        //var grupos = [grupo1, grupo2, grupo3];
-
-        /*flutas.push(grupo);
-        console.log(frutas);*/
-
-        const {centrolojistico = 1} = request.query;
-        //const subgrupo = request.query;
+        const {centrolojistico = 1} = request.query;        
         const [count] = await connection('incidents').count();
-        //console.log(count)
-
-        
-
         const incidents = await connection('incidents')
             .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
             .limit(5)
@@ -60,7 +27,6 @@ module.exports = {
             .orderBy('incidents.id',"desc")
             ;
 
-
             const incidents2 = await connection('incidents')
             .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
             .limit(5)
@@ -76,7 +42,6 @@ module.exports = {
                 'ongs.centrolojistico',
                 'ongs.uf'
             ])
-            //.where('ongs.grupo', '=', grupo, )
             .where('ongs.centrolojistico', '=', centrolojistico )
             .orderBy('incidents.id',"desc");    
 
@@ -97,13 +62,8 @@ module.exports = {
             ])
             .where('incidents.destaque', '=', 2, )
             .orderBy('incidents.id',"desc")
-            //.where('ongs.centrolojistico', '=', centrolojistico );
-
-
-
-
-        response.header('X-Total-Count', count['count(*)']);
-        
+            
+        response.header('X-Total-Count', count['count(*)']);        
 
         if(grupo == 'Todos'){
             console.log(grupo)
@@ -118,20 +78,10 @@ module.exports = {
         }
     },
 
-
-
-
     async create(request, response) {
 
         const { title, description, value, instagram, destaque, google } = request.body
-        const ong_id = request.headers.authorization;
-
-        /*const instagram = '';
-        const description = '';
-        const title = '';
-        */
-        console.log(value)
-        
+        const ong_id = request.headers.authorization;        
         const [id] = await connection('incidents').insert({
             title,
             description,
@@ -142,10 +92,7 @@ module.exports = {
             google
 
         })
-        return response.json({ id })
-               
-        
-        
+        return response.json({ id })         
     },
 
     async delete(request, response) {
@@ -163,8 +110,6 @@ module.exports = {
         console.log(incident.ong_id);
         await connection('incidents').where('id', id).delete();
         return response.status(204).send();
-
-        //jhkjhk
-
+       
     }
 }

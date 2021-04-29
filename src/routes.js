@@ -4,7 +4,6 @@ const IncidentsController = require('./controller/IncidentController');
 const ProfileController = require('./controller/ProfileController');
 const SessionsController = require('./controller/SessionController');
 const ImageController = require('./controller/ImageController');
-
 const routes = express.Router();
 const { celebrate, Segments, Joi } = require('celebrate');
 const InsertUpdateController = require('./controller/InsertUpdateController');
@@ -12,8 +11,6 @@ const InsertUpdateController = require('./controller/InsertUpdateController');
 routes.post('/sessions', SessionsController.create);
 
 routes.get('/imagens', ImageController.index);
-
-
 routes.post('/imagens', celebrate({
     [Segments.BODY]: Joi.object({
         linksimagens: Joi.string().required(),
@@ -21,10 +18,11 @@ routes.post('/imagens', celebrate({
     })
 }), ImageController.create);
 
+//atualização de Imagens
 routes.get('/inup', InsertUpdateController.index);
 
+//inserir e buscar empresa
 routes.get('/ongs', OngController.index);
-
 routes.post('/ongs', celebrate({
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(),
@@ -43,12 +41,10 @@ routes.get('/profile', celebrate({
     }).unknown(),
         
     
-}), ProfileController.index);     
+}), ProfileController.index);  
 
+//buscar anuncio de impresa
 routes.post('/incidents', IncidentsController.create);
-
-
-
 routes.get('/incidents', celebrate({
     [Segments.QUERY]: Joi.object().keys({
         page: Joi.number(),
@@ -58,7 +54,7 @@ routes.get('/incidents', celebrate({
 }), IncidentsController.index);
 
 
-
+//deleter anuncio de empresa
 routes.delete('/incidents/:id', celebrate({
     [Segments.PARAMS]: Joi.object().keys({
         id: Joi.number().required(),

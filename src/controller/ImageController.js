@@ -1,5 +1,4 @@
 const connection = require('../database/connection')
-const crypto = require('crypto');
 
 module.exports = {
 
@@ -7,9 +6,6 @@ module.exports = {
         const image = await connection('imagens').select('*');
         return response.json(image);
     },
-
-
-
 
     async create(request, response) {
 
@@ -19,9 +15,8 @@ module.exports = {
                 
                 linksimagens,
             })
-            //console.log(data);
-
-            return response.json({ linksimagens })
+            
+        return response.json({ linksimagens })
 
     }
 }
