@@ -22,7 +22,7 @@ module.exports = {
             service: 'gmail',
             auth: {
                 user: "acheifsa@gmail.com",
-                pass: "221369wil"
+                pass: ""
             },
             tls: { rejectUnauthorized: false }
           });
